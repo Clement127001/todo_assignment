@@ -4,12 +4,14 @@ import { connectDatabase } from "./config/db.js";
 import notFound from "./middlewares/not-found.js";
 import errorHandlerMiddleware from "./middlewares/error-handler.js";
 import allowCrossDomain from "./middlewares/allow-cors.js";
-import authMiddleware from "./middlewares/authentication.js";
+import { basePath } from "./utils/common.js";
+import authRouter from "./router/auth.js";
 
 const PORT = env.PORT || 3001;
 
 app.use(allowCrossDomain);
-app.use(authMiddleware);
+
+app.use(basePath + "/auth", authRouter);
 
 app.use(notFound);
 app.use(errorHandlerMiddleware);
