@@ -15,4 +15,4 @@ const allowCrossDomain = (req: Request, res: Response, next: NextFunction) => {
   next();
 };
 
-module.exports = allowCrossDomain;
+export default allowCrossDomain;
