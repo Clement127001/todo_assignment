@@ -3,7 +3,7 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 
 import UnauthenticatedError from "../errors/unauthenticated.js";
 
-interface AuthPayload extends JwtPayload {
+export interface AuthPayload extends JwtPayload {
   userId: string;
   name: string;
 }

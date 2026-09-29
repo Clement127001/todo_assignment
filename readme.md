@@ -21,6 +21,7 @@
   - Typescript
   - Mongo DB
   - Mongoose
+  - Zod
 
 ## Routes
 
