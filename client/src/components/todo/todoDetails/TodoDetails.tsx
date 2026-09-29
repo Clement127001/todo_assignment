@@ -108,7 +108,6 @@ const TodoDetails = ({ todoId }: { todoId: string }) => {
     <>
       <div className="flex min-h-screen justify-center px-4 pt-8">
         <div className="w-full max-w-2xl space-y-6">
-          {/* Back link */}
           <Link
             to="/todos"
             className="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-gray-800"
@@ -117,7 +116,6 @@ const TodoDetails = ({ todoId }: { todoId: string }) => {
             Back to todos
           </Link>
 
-          {/* Header */}
           <div className="flex items-center justify-between gap-4">
             <h2 className="text-2xl font-semibold">Todo Details</h2>
 
@@ -144,11 +142,10 @@ const TodoDetails = ({ todoId }: { todoId: string }) => {
             </div>
           </div>
 
-          {/* Todo content */}
           <div className="space-y-3 rounded-md border border-gray-200 p-5">
             <div className="flex items-start justify-between gap-4">
               <h3
-                className={`text-lg font-medium ${
+                className={`text-lg font-bold ${
                   todoData.completed
                     ? "text-gray-400 line-through"
                     : "text-gray-800"
