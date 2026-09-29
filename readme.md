@@ -31,7 +31,30 @@
 
 - Todo Routes
   - List Todos - /api/todos
-  - Get Todo - /api/todos/:id
+  - Get Todo - /api/todos/:todoId
   - Create Todo - /api/todos
-  - Update Todo - /api/todos/:id
-  - Delete Todo - /api/todos/:id|
+  - Update Todo - /api/todos/:todoId
+  - Delete Todo - /api/todos/:todoId
+
+### setup for backend
+
+- note : setup the env file before starting the backend
+
+```
+PORT=3000
+MONGO_URI=<your_mongo_db_uri>
+JWT_SECRET=<your_jwt_secret>
+JWT_LIFETIME=7d
+```
+
+- install all packages
+
+```
+npm i
+```
+
+- start dev server:
+
+```
+npm run dev
+```
