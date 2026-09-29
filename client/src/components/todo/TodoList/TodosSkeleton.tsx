@@ -5,7 +5,7 @@ const TodosSkeleton = () => {
         .fill(0)
         .map((_, index) => (
           <div
-            key={"blog skeleton " + index}
+            key={"Todo skeleton " + index}
             className="h-30 flex gap-10 animate-pulse"
           >
             <div className="flex-5/6 space-y-3">

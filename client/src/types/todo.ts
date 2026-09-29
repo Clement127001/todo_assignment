@@ -8,3 +8,8 @@ export interface Todo {
 export interface TodosResponse {
   todos: Todo[];
 }
+
+export type TodoFormType = {
+  title: string;
+  description: string;
+};
