@@ -87,6 +87,8 @@ http://localhost:5173
 - Zod
 - JWT
 - bcrypt
+- vitest
+- supertest
 
 ## Backend Setup
 
