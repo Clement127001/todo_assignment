@@ -1,6 +1,6 @@
+import { toast } from "sonner";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import Cookies from "js-cookie";
-import { toast } from "sonner";
 import {
   Dialog,
   DialogContent,
@@ -11,22 +11,25 @@ import {
 } from "@/components/ui/dialog";
 import TodoForm from "@/components/form/TodoForm";
 import { usePageLoader } from "@/contexts/pageLoaderProvider";
+import type { Todo, TodoFormType } from "@/types/todo";
 import { baseApiUrl } from "@/utils/common";
-import type { TodoFormType } from "@/types/todo";
 
-const CreateTodoModal = ({
+const EditTodoModal = ({
+  todoData,
   opened,
   onClose,
-  fetchTodoList,
+  fetchTodoData,
 }: {
+  todoData: Todo;
   opened: boolean;
   onClose: () => void;
-  fetchTodoList: () => Promise<void>;
+  fetchTodoData: () => Promise<void>;
 }) => {
+  const { title, description } = todoData;
   const todoForm = useForm<TodoFormType>({
     defaultValues: {
-      title: "",
-      description: "",
+      title,
+      description,
     },
   });
 
@@ -38,8 +41,8 @@ const CreateTodoModal = ({
 
     try {
       const userToken = Cookies.get("userToken");
-      const response = await fetch(`${baseApiUrl}/todo`, {
-        method: "POST",
+      const response = await fetch(`${baseApiUrl}/todo/${todoData._id}`, {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${userToken}`,
@@ -49,19 +52,19 @@ const CreateTodoModal = ({
 
       if (response.ok) {
         toast.success("Success", {
-          description: "Todo created successfully",
+          description: "Todo edited successfully",
           duration: 2000,
           action: {
             label: "close",
             onClick: () => {},
           },
         });
+        fetchTodoData();
         onClose();
-        fetchTodoList();
       } else {
         const err = await response.json();
         toast.error("Error", {
-          description: err.msg ?? "Failed to create todo",
+          description: err.msg ?? "Failed to edit todo",
           action: {
             label: "close",
             onClick: () => {},
@@ -70,7 +73,7 @@ const CreateTodoModal = ({
       }
     } catch (_) {
       toast.error("Error", {
-        description: "Failed to create todo",
+        description: "Failed to edit todo",
         duration: 2000,
         action: {
           label: "close",
@@ -92,11 +95,15 @@ const CreateTodoModal = ({
           </DialogDescription>
         </DialogHeader>
         <DialogFooter className="sm:justify-start mt-4 w-full flex gap-3  overflow-y-auto">
-          <TodoForm todoForm={todoForm} onSubmit={handleSubmit(onCreateTodo)} />
+          <TodoForm
+            isEdit
+            todoForm={todoForm}
+            onSubmit={handleSubmit(onCreateTodo)}
+          />
         </DialogFooter>
       </DialogContent>
     </Dialog>
   );
 };
 
-export default CreateTodoModal;
+export default EditTodoModal;

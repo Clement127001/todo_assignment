@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 export const baseApiUrl = "http://localhost:3000/api";
 
 export const loginPages = ["/login", "/register"];
-export const loginRestrictedPages = ["/todos", "/todos/edit"];
+export const loginRestrictedPages = ["/todos"];
 
 export const validateToken = (token: string | undefined) => {
   return token !== undefined && token.length !== 0;
