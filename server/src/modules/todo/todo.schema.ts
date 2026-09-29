@@ -34,16 +34,21 @@ export const updateTodoSchema = z.object({
         .min(20, "Description should have at least 20 characters")
         .max(2500, "Description cannot exceed 2500 characters")
         .optional(),
+
+      completed: z.boolean().optional(),
     })
     .refine(
-      (data) => data.title !== undefined || data.description !== undefined,
+      (data) =>
+        data.title !== undefined ||
+        data.description !== undefined ||
+        data.completed !== undefined,
       {
         message: "At least one field is required for update",
       },
     ),
 
   params: z.object({
-    id: objectIdSchema,
+    todoId: objectIdSchema,
   }),
 });
 

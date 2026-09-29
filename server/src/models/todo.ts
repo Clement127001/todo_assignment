@@ -4,6 +4,7 @@ interface TodoInterface {
   title: string;
   description: string;
   author: Types.ObjectId;
+  completed: boolean;
 }
 
 export interface TodoDocument extends TodoInterface, Document {}
@@ -31,6 +32,10 @@ const todoSchema = new Schema<TodoDocument, TodoModel>(
       type: mongoose.Types.ObjectId,
       ref: "User",
       required: true,
+    },
+    completed: {
+      type: Boolean,
+      default: false,
     },
   },
 

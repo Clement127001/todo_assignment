@@ -7,13 +7,14 @@ import allowCrossDomain from "./middlewares/allow-cors.js";
 import { basePath } from "./utils/common.js";
 import authRouter from "./router/auth.js";
 import todoRouter from "./router/todo.js";
+import authMiddleware from "./middlewares/authentication.js";
 
 const PORT = env.PORT || 3001;
 
 app.use(allowCrossDomain);
 
 app.use(basePath + "/auth", authRouter);
-app.use(basePath + "/todo", todoRouter);
+app.use(basePath + "/todo", authMiddleware, todoRouter);
 
 app.use(notFound);
 app.use(errorHandlerMiddleware);
